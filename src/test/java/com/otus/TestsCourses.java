@@ -2,6 +2,7 @@ package com.otus;
 
 import com.otus.annotations.Driver;
 import com.otus.extensions.UIExtensions;
+import com.otus.pages.TrainingCoursesPages;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
@@ -28,5 +29,11 @@ public class TestsCourses {
     MainPage mainPage = new MainPage(driver);
     mainPage.open("/").mainPageWaitDownload("Популярные курсы");
     mainPage.mainPageGetCoursesDate(LocalDate.parse("2024-03-11"));
+  }
+  @Test
+  public void openTrainingCoursesPages(){
+    TrainingCoursesPages trainingCoursesPages = new TrainingCoursesPages(driver);
+    trainingCoursesPages.open("/online").trainingCoursesPageWait();
+    trainingCoursesPages.trainingCoursesPagesGetMinMaxCoursesTax();
   }
 }
