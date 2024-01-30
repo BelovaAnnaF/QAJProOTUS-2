@@ -1,4 +1,4 @@
-package factory.impl;
+package com.otus.factory.impl;
 
 import org.openqa.selenium.WebDriver;
 

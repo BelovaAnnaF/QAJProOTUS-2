@@ -1,9 +1,9 @@
-package factory;
+package com.otus.factory;
 
-import exeptions.DriverNotSupportedException;
-import factory.impl.ChromeDriverOptions;
-import factory.impl.FirefoxDriverOptions;
-import factory.impl.OperaDriverOptions;
+import com.otus.exeptions.DriverNotSupportedException;
+import com.otus.factory.impl.OperaDriverOptions;
+import com.otus.factory.impl.ChromeDriverOptions;
+import com.otus.factory.impl.FirefoxDriverOptions;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 //    1. Фабрику (WebDriverFactory), которая будет получать значение из окружения и запускать соответствующий браузер

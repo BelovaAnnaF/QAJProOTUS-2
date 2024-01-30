@@ -1,4 +1,4 @@
-package pageobject;
+package com.otus.pageobject;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;

@@ -1,11 +1,11 @@
-package otus.courses;
+package com.otus;
 
-import annotations.Driver;
-import extensions.UIExtensions;
+import com.otus.annotations.Driver;
+import com.otus.extensions.UIExtensions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import pages.MainPage;
+import com.otus.pages.MainPage;
 
 import java.time.LocalDate;
 

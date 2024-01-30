@@ -1,4 +1,4 @@
-package exeptions;
+package com.otus.exeptions;
 
 public class DriverNotSupportedException extends RuntimeException {
   public DriverNotSupportedException(String browser) {

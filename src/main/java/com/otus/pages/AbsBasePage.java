@@ -1,8 +1,8 @@
-package pages;
+package com.otus.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import pageobject.AbsPageObject;
+import com.otus.pageobject.AbsPageObject;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

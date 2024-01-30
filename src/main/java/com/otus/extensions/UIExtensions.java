@@ -1,8 +1,8 @@
-package extensions;
+package com.otus.extensions;
 
-import annotations.Driver;
-import factory.WebDriverFactory;
-import listeners.WebDriverListener;
+import com.otus.annotations.Driver;
+import com.otus.factory.WebDriverFactory;
+import com.otus.listeners.WebDriverListener;
 import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;

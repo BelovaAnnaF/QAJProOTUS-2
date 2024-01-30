@@ -1,7 +1,7 @@
-package components;
+package com.otus.components;
 
 import org.openqa.selenium.WebDriver;
-import pageobject.AbsPageObject;
+import com.otus.pageobject.AbsPageObject;
 
 public abstract class AbsBaseCommponent extends AbsPageObject {
   public AbsBaseCommponent(WebDriver driver) {

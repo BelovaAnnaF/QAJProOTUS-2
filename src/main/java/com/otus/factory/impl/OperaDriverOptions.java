@@ -1,4 +1,4 @@
-package factory.impl;
+package com.otus.factory.impl;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
