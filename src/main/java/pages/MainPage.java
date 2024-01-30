@@ -85,13 +85,15 @@ public class MainPage extends AbsBasePage<MainPage> {
       ).collect(Collectors.toList());
 
     for (Map.Entry<WebElement, LocalDate> e : coursesStartMap.entrySet()) {
-      if (e.getValue().isAfter(dateCourses) || e.getValue().equals(dateCourses)) ;
+      if (e.getValue().isAfter(dateCourses) || e.getValue().equals(dateCourses)) {
 
-      WebElement cartCoursesElement = e.getKey().findElement(By.xpath(".//ancestor::a"));
-      String titleCourses = cartCoursesElement
-              .findElement(By.cssSelector("h5"))
-              .getText();
-      System.out.printf("Название курса - %s, курс стартует с - %s \n", titleCourses, e.getValue());
+        WebElement cartCoursesElement = e.getKey().findElement(By.xpath(".//ancestor::a"));
+        String titleCourses = cartCoursesElement
+                .findElement(By.cssSelector("h5"))
+                .getText();
+        System.out.printf("Название курса - %s, курс стартует с - %s \n", titleCourses, e.getValue());
+
+      }
     }
   }
 }
