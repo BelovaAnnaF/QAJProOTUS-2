@@ -1,18 +1,14 @@
 package com.otus;
 
 import com.otus.annotations.Driver;
-import com.otus.extensions.UIExtensions;
+import com.otus.pages.MainPage;
 import com.otus.pages.TrainingCoursesPages;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import com.otus.pages.MainPage;
 
 import java.time.LocalDate;
 
-@ExtendWith(UIExtensions.class)
 public class TestsCourses {
-
   @Driver
   private WebDriver driver;
   //проверяем фильтр по имени курса, найти курс, подсветить и кликнуть, после открытия в карточке курса проверяем, что имя соответствует заданому фильтру
