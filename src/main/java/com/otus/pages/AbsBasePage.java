@@ -1,5 +1,6 @@
 package com.otus.pages;
 
+import com.otus.support.GuiceScooped;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import com.otus.pageobject.AbsPageObject;
@@ -12,11 +13,9 @@ public abstract class AbsBasePage<T> extends AbsPageObject {
 
   private String baseUrl = System.getProperty("base.url", "https://otus.ru");
   private String path = "";
-  protected WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
-
-  public AbsBasePage(WebDriver driver) {
-    super(driver);
+  public AbsBasePage(GuiceScooped guiceScooped) {
+    super(guiceScooped);
   }
 
   private String normaliseBaseUrl() {
@@ -27,27 +26,7 @@ public abstract class AbsBasePage<T> extends AbsPageObject {
 
   public T open(String path) {
     driver.get(normaliseBaseUrl() + path);
-    return (T) page(getClass());
+    return (T) this;
   }
 
-  public <T> T page(Class<T> clazz) {
-    try {
-      Constructor constructor = clazz.getConstructor(WebDriver.class);
-
-      return convertInstanceOfObject(constructor.newInstance(driver), clazz);
-
-    } catch (NoSuchMethodException | IllegalAccessException | InstantiationException | InvocationTargetException e) {
-      e.printStackTrace();
-    }
-
-    return null;
-  }
-
-  private static <T> T convertInstanceOfObject(Object o, Class<T> clazz) {
-    try {
-      return clazz.cast(o);
-    } catch (ClassCastException e) {
-      return null;
-    }
-  }
 }

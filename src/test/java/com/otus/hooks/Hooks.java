@@ -11,9 +11,9 @@ public class Hooks {
   @After
   public void close(){
 
-    if(guiceScooped.getDriver() != null){
-      guiceScooped.getDriver().close();
-      guiceScooped.getDriver().quit();
+    if(guiceScooped.driver != null){
+      guiceScooped.driver.close();
+      guiceScooped.driver.quit();
     }
 
   }

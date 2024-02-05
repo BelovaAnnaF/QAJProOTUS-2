@@ -1,23 +1,32 @@
 package com.otus.pages;
 
+import com.google.inject.Inject;
 import com.otus.listeners.WebDriverListener;
+import com.otus.support.GuiceScooped;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 
 public class MainPage extends AbsBasePage<MainPage> {
+  @Inject
+  public MainPage(GuiceScooped guiceScooped){super(guiceScooped);}
 
   private String courseNameLocator = "//div[h5[contains(text(), '%s')]]";
   private String inPutButtonLocator = "//button[contains(text(), 'Войти')]";
@@ -28,12 +37,10 @@ public class MainPage extends AbsBasePage<MainPage> {
   private WebDriverListener eventListener = new WebDriverListener();
   private Logger log = LogManager.getLogger();
 
-  public MainPage(WebDriver driver) {
-    super(driver);
-  }
-
   //ожидаем окончания загрузки главной страницы и проверяем наличие блока Популярные курсы
   public void mainPageWaitDownload(String blockName) {
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(inPutButtonLocator)));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(findNameBlockLocator, blockName))));
   }
@@ -41,11 +48,14 @@ public class MainPage extends AbsBasePage<MainPage> {
   //ищем на главной странице курс по имени
   public void mainPageCourseFind(String courseName) {
     WebElement courseComponentName = driver.findElement(By.xpath(String.format(courseNameLocator, courseName)));
+    JavascriptExecutor js = (JavascriptExecutor) driver;
+    js.executeScript("arguments[0].scrollIntoView();", courseComponentName);
     eventListener.beforeClickOn(courseComponentName, driver);
   }
 
   //клик по карточке курса
   public void mainPageCourseClick(String courseName) {
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     new Actions(driver).click(driver.findElement(By.xpath(String.format(courseNameLocator, courseName)))).perform();
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(coursePageCheck, courseName))));
   }
@@ -58,6 +68,8 @@ public class MainPage extends AbsBasePage<MainPage> {
 
   //получаем список курсов на главной странице и собираем даты их начала
   public void mainPageGetCoursesDate(LocalDate dateCourses) {
+    JavascriptExecutor js = (JavascriptExecutor)driver;
+    js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     Map<WebElement, LocalDate> coursesStartMap = new HashMap<>();
 
       dateItem.stream().map((WebElement element) -> {
@@ -95,5 +107,6 @@ public class MainPage extends AbsBasePage<MainPage> {
     }
   }
 }
+
 
 

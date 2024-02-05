@@ -1,7 +1,7 @@
 package com.otus.factory.impl;
 
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.MutableCapabilities;
 
 public interface IBrouserOptions {
-  WebDriver getOptions();
+  MutableCapabilities getOptions();
 }

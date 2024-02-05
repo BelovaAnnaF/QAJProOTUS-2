@@ -1,14 +1,17 @@
 package com.otus.pages;
 
 
+import com.google.inject.Inject;
+import com.otus.support.GuiceScooped;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.time.Duration;
 import java.util.*;
 
 import static org.jsoup.Jsoup.connect;
@@ -18,10 +21,11 @@ public class TrainingCoursesPages extends AbsBasePage<TrainingCoursesPages> {
   /*Перейти в раздел Курсы > Подготовительные курсы (https://otus.ru/online/),
   выбрать самый дорогой и самый дешевый курс при помощи filter и вывод информации о нем в консоль.
    */
-  public TrainingCoursesPages(WebDriver driver) {
-    super(driver);
-  }
+  @Inject
+  public TrainingCoursesPages(GuiceScooped guiceScooped){super(guiceScooped);}
   public void trainingCoursesPageWait(){
+
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[contains(text(), 'Онлайн-курсы для подготовки к поступлению на основные курсы')]")));
   }
   public void trainingCoursesPagesGetMinMaxCoursesTax() {

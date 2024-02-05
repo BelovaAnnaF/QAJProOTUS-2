@@ -1,11 +1,15 @@
 package com.otus.factory;
 
 import com.otus.exeptions.DriverNotSupportedException;
-import com.otus.factory.impl.OperaDriverOptions;
+import com.otus.factory.impl.IBrouserOptions;
 import com.otus.factory.impl.ChromeDriverOptions;
 import com.otus.factory.impl.FirefoxDriverOptions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 //    1. Фабрику (WebDriverFactory), которая будет получать значение из окружения и запускать соответствующий браузер
 //    Браузеры: Chrome, Firefox, Opera
@@ -21,13 +25,14 @@ public class WebDriverFactory implements IFactory {
 
     switch (brouserName) {
       case "chrome": {
-        return new EventFiringWebDriver(new ChromeDriverOptions().getOptions());
+        WebDriverManager.chromedriver().setup();
+        IBrouserOptions options = new ChromeDriverOptions();
+        return new ChromeDriver((ChromeOptions) options.getOptions());
       }
       case "firefox": {
-        return new EventFiringWebDriver(new FirefoxDriverOptions().getOptions());
-      }
-      case "opera": {
-        return new EventFiringWebDriver(new OperaDriverOptions().getOptions());
+        WebDriverManager.firefoxdriver().setup();
+        IBrouserOptions options = new FirefoxDriverOptions();
+        return new FirefoxDriver((FirefoxOptions) options.getOptions());
       }
     }
     return null;
