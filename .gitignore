@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 !**/allure-results/
+**/.allure
 
 *.log
 
@@ -11,4 +12,6 @@ target/
 *.iml
 *.ipr
 *.txt
+*-results.json
+*-container.json
 
