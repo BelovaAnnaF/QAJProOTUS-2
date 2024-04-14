@@ -72,26 +72,26 @@ public class MainPage extends AbsBasePage<MainPage> {
     js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
     Map<WebElement, LocalDate> coursesStartMap = new HashMap<>();
 
-      dateItem.stream().map((WebElement element) -> {
-        List<String> dateStringList  = Arrays.stream(element.getText().split(" ")).skip(1)
-                .limit(2).collect(Collectors.toList());
-        if (dateStringList.size() < 3) {
-          if (dateStringList.get(1).equals("декабря")) {
-            dateStringList.add(2, String.valueOf(LocalDate.now().getYear() - 1));
-          } else {
-            dateStringList.add(2, String.valueOf(LocalDate.now().getYear()));
-          }
+    dateItem.stream().map((WebElement element) -> {
+      List<String> dateStringList  = Arrays.stream(element.getText().split(" ")).skip(1)
+              .limit(2).collect(Collectors.toList());
+      if (dateStringList.size() < 3) {
+        if (dateStringList.get(1).equals("декабря")) {
+          dateStringList.add(2, String.valueOf(LocalDate.now().getYear() - 1));
+        } else {
+          dateStringList.add(2, String.valueOf(LocalDate.now().getYear()));
         }
-
-        String dateInString = dateStringList.get(0) + " " + dateStringList.get(1) + " " + dateStringList.get(2);
-
-        if (Pattern.compile("\\d+ [а-я]+ \\d{4}").matcher(dateInString).find()) {
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
-          coursesStartMap.put(element, LocalDate.parse(dateInString, formatter));
-        }
-
-        return coursesStartMap;
       }
+
+      String dateInString = dateStringList.get(0) + " " + dateStringList.get(1) + " " + dateStringList.get(2);
+
+      if (Pattern.compile("\\d+ [а-я]+ \\d{4}").matcher(dateInString).find()) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+        coursesStartMap.put(element, LocalDate.parse(dateInString, formatter));
+      }
+
+      return coursesStartMap;
+    }
       ).collect(Collectors.toList());
 
     for (Map.Entry<WebElement, LocalDate> e : coursesStartMap.entrySet()) {

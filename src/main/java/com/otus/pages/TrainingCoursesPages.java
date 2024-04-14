@@ -1,5 +1,6 @@
 package com.otus.pages;
 
+import static org.jsoup.Jsoup.connect;
 
 import com.google.inject.Inject;
 import com.otus.support.GuiceScooped;
@@ -13,8 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.*;
-
-import static org.jsoup.Jsoup.connect;
 
 public class TrainingCoursesPages extends AbsBasePage<TrainingCoursesPages> {
 
